@@ -118,9 +118,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DBContext\Student_DBContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AcademicClass.cs" />
     <Compile Include="Models\Enums\Gender.cs" />
     <Compile Include="Models\Student.cs" />
@@ -183,7 +185,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="BLL\" />
-    <Folder Include="DBContext\" />
     <Folder Include="DLL\" />
     <Folder Include="Models\Interfaces\" />
   </ItemGroup>
