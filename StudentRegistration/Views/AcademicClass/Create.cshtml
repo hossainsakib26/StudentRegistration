@@ -1,0 +1,32 @@
+﻿@model StudentRegistration.Models.AcademicClass
+
+@{
+    ViewBag.Title = "Registration Form";
+}
+
+@using (Html.BeginForm("Create", "AcademicClass", FormMethod.Post))
+{
+    @Html.AntiForgeryToken() // hide form data
+    <div class="bg-light my-3 p-2">
+        <h3 class="">Academic Division</h3>
+        @Html.HiddenFor(c => c.ID)
+
+        <div class="border-bottom border-dark pb-1">
+            <div class="mb-3 row">
+                @Html.LabelFor(c => c.Code, new { @class = "form-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(c => c.Code, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="mb-3 row">
+                @Html.LabelFor(c => c.Name, new { @class = "form-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(c => c.Name, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="mt-3">
+            <button type="submit" class="btn btn-outline-info" value="create">Create</button>
+        </div>
+    </div>
+}

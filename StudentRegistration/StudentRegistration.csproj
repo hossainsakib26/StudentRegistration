@@ -116,8 +116,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="BLL\AcademicClassBLL.cs" />
     <Compile Include="Controllers\AcademicClassController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DAL\AcademicClassDAL.cs" />
     <Compile Include="DBContext\Student_DBContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -133,6 +135,10 @@
     <Compile Include="Migrations\202208031342291_SetForeignKeyInStudentClass.cs" />
     <Compile Include="Migrations\202208031342291_SetForeignKeyInStudentClass.designer.cs">
       <DependentUpon>202208031342291_SetForeignKeyInStudentClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208050510412_NewPropertyAcademicClass.cs" />
+    <Compile Include="Migrations\202208050510412_NewPropertyAcademicClass.Designer.cs">
+      <DependentUpon>202208050510412_NewPropertyAcademicClass.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AcademicClass.cs" />
@@ -157,6 +163,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\MyContent\MyCSS.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -166,6 +173,7 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\MyContent\MySCSS.scss" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -194,11 +202,10 @@
     <Content Include="Views\Shared\CommonNeeds\_MenuBar.cshtml" />
     <Content Include="Views\Shared\CommonNeeds\_Footer.cshtml" />
     <Content Include="Views\AcademicClass\ClassList.cshtml" />
+    <Content Include="Views\AcademicClass\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="BLL\" />
-    <Folder Include="DLL\" />
     <Folder Include="Models\Interfaces\" />
   </ItemGroup>
   <ItemGroup>
@@ -237,6 +244,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202208031342291_SetForeignKeyInStudentClass.resx">
       <DependentUpon>202208031342291_SetForeignKeyInStudentClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208050510412_NewPropertyAcademicClass.resx">
+      <DependentUpon>202208050510412_NewPropertyAcademicClass.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
