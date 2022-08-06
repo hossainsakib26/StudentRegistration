@@ -13,15 +13,31 @@ namespace StudentRegistration.Controllers
         public AcademicClassBLL _academicClassBll = new AcademicClassBLL();
 
         // GET: AcademicClass
+        [HttpGet]
         public ActionResult ClassList()
         {
-            var classes =  _academicClassBll.Classes();
+            var classes = _academicClassBll.Classes();
             return View(classes);
         }
-
         public ActionResult Create()
         {
             return View();
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(AcademicClass classData)
+        {
+            if (ModelState.IsValid)
+            {
+                _academicClassBll.AddClass(classData);
+                ViewBag.successMsg = "New data added.";
+            }
+            else
+            {
+                ViewBag.faildMsg = "New data add process failed!";
+            }
+            return View();
+        }
+
     }
 }

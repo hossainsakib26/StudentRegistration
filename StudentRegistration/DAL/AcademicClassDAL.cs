@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using StudentRegistration.DBContext;
 using StudentRegistration.Models;
@@ -14,6 +15,24 @@ namespace StudentRegistration.DAL
         public ICollection<AcademicClass> ClassList()
         {
             return _db.AcademicClasses.ToList();
+        }
+
+        public bool AddClass(AcademicClass aClass)
+        {
+            try
+            {
+                if (aClass != null)
+                { 
+                    _db.AcademicClasses.Add(aClass);
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
         }
     }
 }
