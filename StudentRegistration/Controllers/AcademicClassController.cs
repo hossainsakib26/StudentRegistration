@@ -27,7 +27,7 @@ namespace StudentRegistration.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(AcademicClass classData)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 _academicClassBll.AddClass(classData);
                 ViewBag.successMsg = "New data added.";

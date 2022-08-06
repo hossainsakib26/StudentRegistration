@@ -144,6 +144,10 @@
     <Compile Include="Migrations\202208060431235_AnnotationsAddedForAcademicClass.Designer.cs">
       <DependentUpon>202208060431235_AnnotationsAddedForAcademicClass.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202208061556176_AcademicClassModelNameCodeStringLengthUpdated.cs" />
+    <Compile Include="Migrations\202208061556176_AcademicClassModelNameCodeStringLengthUpdated.Designer.cs">
+      <DependentUpon>202208061556176_AcademicClassModelNameCodeStringLengthUpdated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AcademicClass.cs" />
     <Compile Include="Models\Enums\Gender.cs" />
@@ -254,6 +258,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202208060431235_AnnotationsAddedForAcademicClass.resx">
       <DependentUpon>202208060431235_AnnotationsAddedForAcademicClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208061556176_AcademicClassModelNameCodeStringLengthUpdated.resx">
+      <DependentUpon>202208061556176_AcademicClassModelNameCodeStringLengthUpdated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

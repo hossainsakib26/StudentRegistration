@@ -24,6 +24,7 @@ namespace StudentRegistration.DAL
                 if (aClass != null)
                 { 
                     _db.AcademicClasses.Add(aClass);
+                    _db.SaveChanges();
                     return true;
                 }
                 return false;
