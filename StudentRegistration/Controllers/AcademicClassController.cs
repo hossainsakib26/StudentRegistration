@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using StudentRegistration.BLL;
 using StudentRegistration.Models;
+using StudentRegistration.Models.Enums;
+using StudentRegistration.Services;
 
 namespace StudentRegistration.Controllers
 {
@@ -30,11 +32,11 @@ namespace StudentRegistration.Controllers
             if (!ModelState.IsValid)
             {
                 _academicClassBll.AddClass(classData);
-                ViewBag.successMsg = "New data added.";
+                ViewBag.Alert = ServeAlert.ShowAlart(Alert.Success, "Data Added Bandhu..");
             }
             else
             {
-                ViewBag.faildMsg = "New data add process failed!";
+                ViewBag.Alert = ServeAlert.ShowAlart(Alert.Danger, "Data Add Process failed Bandhu..");
             }
             return View();
         }
