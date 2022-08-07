@@ -11,11 +11,13 @@ namespace StudentRegistration.Models
     {
         [Key]
         public int ID { get; set; }
-        [StringLength(10, ErrorMessage = "Maximum length will be 4")][Required]
+        [StringLength(10, ErrorMessage = "Maximum length will be 10")][Required]
         public string Code { get; set; }
         [Required] [StringLength(100, ErrorMessage = "Maximum length will be 100")]
         public string Name { get; set; }
-        public ICollection<Student> Students { get; set; }
+
+
+        public ICollection<Student>? Students { get; set; }
 
     }
 }

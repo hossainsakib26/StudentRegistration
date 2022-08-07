@@ -32,8 +32,8 @@ namespace StudentRegistration.DAL
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return false;
             }
+            return false;
         }
     }
 }

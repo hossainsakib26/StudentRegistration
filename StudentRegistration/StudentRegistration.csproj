@@ -33,6 +33,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,6 +43,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -148,6 +150,10 @@
     <Compile Include="Migrations\202208061556176_AcademicClassModelNameCodeStringLengthUpdated.Designer.cs">
       <DependentUpon>202208061556176_AcademicClassModelNameCodeStringLengthUpdated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202208070511224_AddNullableReferenceInAcademicClass.cs" />
+    <Compile Include="Migrations\202208070511224_AddNullableReferenceInAcademicClass.Designer.cs">
+      <DependentUpon>202208070511224_AddNullableReferenceInAcademicClass.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AcademicClass.cs" />
     <Compile Include="Models\Enums\Gender.cs" />
@@ -182,6 +188,9 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\MyContent\MySCSS.scss" />
+    <Content Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </Content>
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -261,6 +270,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202208061556176_AcademicClassModelNameCodeStringLengthUpdated.resx">
       <DependentUpon>202208061556176_AcademicClassModelNameCodeStringLengthUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208070511224_AddNullableReferenceInAcademicClass.resx">
+      <DependentUpon>202208070511224_AddNullableReferenceInAcademicClass.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
