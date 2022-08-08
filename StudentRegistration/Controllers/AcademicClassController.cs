@@ -29,15 +29,25 @@ namespace StudentRegistration.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(AcademicClass classData)
         {
-            if (!ModelState.IsValid)
+            AcademicClass singleData = null;
+            var dataList = _academicClassBll.Classes();
+
+            singleData = dataList.Where(c => c.Code == classData.Code).FirstOrDefault();
+            if (singleData.Code != classData.Code || singleData.Name != classData.Name)
             {
-                _academicClassBll.AddClass(classData);
-                ViewBag.Alert = ServeAlert.ShowAlart(Alert.Success, "Data Added Bandhu..");
+                if (!ModelState.IsValid)
+                {
+                    _academicClassBll.AddClass(classData);
+                    ViewBag.Alert = ServeAlert.ShowAlart(Alert.Success, "Data Added Bandhu..");
+                    return View();
+                }
+                else
+                {
+                    ViewBag.Alert = ServeAlert.ShowAlart(Alert.Danger, "Data Add Process failed Bandhu..");
+                }
+
             }
-            else
-            {
-                ViewBag.Alert = ServeAlert.ShowAlart(Alert.Danger, "Data Add Process failed Bandhu..");
-            }
+            ViewBag.Alert = ServeAlert.ShowAlart(Alert.Danger, "Your data was matching with another data");
             return View();
         }
 
