@@ -9,20 +9,21 @@
 </head>
 <body>
 
-@Html.Partial("CommonNeeds/_MenuBar")
+    @Html.Partial("CommonNeeds/_MenuBar")
 
-<div class="container body-content">
+    <div class="container body-content">
 
-    @RenderBody()
-    
-    @{
-        Html.RenderPartial("CommonNeeds/_Footer");
-    }
+        @RenderBody()
 
-</div>
+        @{
+            Html.RenderPartial("CommonNeeds/_Footer");
+        }
 
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/bootstrap")
-@RenderSection("scripts", required: false)
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @*@Scripts.Render("~/bundles/javaScript")*@
+    @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -8,6 +8,8 @@ namespace StudentRegistration
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            bundles.UseCdn = true;
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
@@ -25,8 +27,14 @@ namespace StudentRegistration
                 "~/Scripts/bootstrap.min.js"
                 ));
 
+            bundles.Add(new ScriptBundle("~/bundles/javaScript").Include(
+                "~/scripts/My_JS/academicClass.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                "~/Content/bootstrap.css", "~/Content/bootstrap.min.css", "~/Content/site.css", "~/Content/MyContent/MyCSS.css"));
+                "~/Content/bootstrap.css", 
+                "~/Content/bootstrap.min.css", 
+                "~/Content/site.css", 
+                "~/Content/MyContent/MyCSS.css"));
 
         }
     }
