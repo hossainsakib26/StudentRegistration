@@ -13,6 +13,7 @@ namespace StudentRegistration.Controllers
     public class AcademicClassController : Controller
     {
         public AcademicClassBLL _academicClassBll = new AcademicClassBLL();
+        private AcademicClass _class = new AcademicClass();
 
         // GET: AcademicClass
         [HttpGet]
@@ -29,7 +30,12 @@ namespace StudentRegistration.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(AcademicClass classData)
         {
-            AcademicClass singleData = null;
+            _class.Code = Convert.ToString(Request.QueryString["codeJS"]);
+            _class.Name = Convert.ToString(Request.QueryString["nameJS"]);
+
+            classData = _class;
+
+            var singleData = new AcademicClass();
             var dataList = _academicClassBll.Classes();
 
             singleData = dataList.Where(c => c.Code == classData.Code).FirstOrDefault();

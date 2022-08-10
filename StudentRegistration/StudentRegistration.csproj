@@ -158,6 +158,7 @@
     <Compile Include="Models\AcademicClass.cs" />
     <Compile Include="Models\Enums\Alert.cs" />
     <Compile Include="Models\Enums\Gender.cs" />
+    <Compile Include="Models\Interfaces\IAcademicClass.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ServeAlert.cs" />
@@ -226,7 +227,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
