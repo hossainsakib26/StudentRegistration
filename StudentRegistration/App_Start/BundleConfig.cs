@@ -16,6 +16,7 @@ namespace StudentRegistration
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
+
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
@@ -28,6 +29,9 @@ namespace StudentRegistration
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/javaScript").Include(
+                "~/Scripts/jquery.unobtrusive-ajax.js",
+                "~/Scripts/jquery.validate.min.js",
+                "~/Scripts/jquery.validate.unobtrusive.min.js",
                 "~/scripts/My_JS/academicClass.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

@@ -39,7 +39,7 @@ namespace StudentRegistration.Controllers
             var dataList = _academicClassBll.Classes();
 
             singleData = dataList.Where(c => c.Code == classData.Code).FirstOrDefault();
-            if (singleData.Code != classData.Code || singleData.Name != classData.Name)
+            if (singleData.Code != classData.Code && singleData.Name != classData.Name)
             {
                 if (!ModelState.IsValid)
                 {

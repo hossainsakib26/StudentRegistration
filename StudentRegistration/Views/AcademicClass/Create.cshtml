@@ -4,6 +4,9 @@
     ViewBag.Title = "Academic Class Create";
 }
 
+@*<script src="~/Scripts/jquery-3.6.0.js"></script>*@
+@*<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>*@
+
 
 @using (Html.BeginForm("Create", "AcademicClass", FormMethod.Post, new { @class = "col" }))
 {
@@ -41,5 +44,8 @@
     </div>
 }
 
-
+@*<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+@*@Scripts.Render("~/bundles/Ajax")*@
 @Scripts.Render("~/bundles/javaScript")
+@*@Scripts.Render(("~/bundles/javaScript"))*@
