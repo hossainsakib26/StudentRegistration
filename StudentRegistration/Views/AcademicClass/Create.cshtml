@@ -4,48 +4,39 @@
     ViewBag.Title = "Academic Class Create";
 }
 
-@*<script src="~/Scripts/jquery-3.6.0.js"></script>*@
-@*<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>*@
 
-
-@using (Html.BeginForm("Create", "AcademicClass", FormMethod.Post, new { @class = "col" }))
+@using (Ajax.BeginForm("Create", "AcademicClass", new AjaxOptions()
 {
-    @Html.AntiForgeryToken() // hide form data
-    <div class="bg-light my-3 p-2 row">
-        <p class="fs-1">Academic Division</p>
+    OnSuccess = "fnSuccess",
+    OnFailure = "fnFailure",
+    HttpMethod = "POST"
+
+}))
+{
+
+    <div class="col m-sm-0 m-lg-4 p-lg-4" style="background-color: #3c4a5c; color: aliceblue; padding: 20px;">
+
+        <div class="row border-bottom border-3">
+            <h3 class="fs-4 text-white">Create A Class</h3>
+        </div>
+        @Html.AntiForgeryToken()
         @Html.HiddenFor(c => c.ID)
 
-        <div class="border-bottom border-3 border-dark pb-1 col-12">
-            <div class="mb-3 row">
-                @Html.LabelFor(c => c.Code, new { @class = "form-label  col-md-12 col-lg-3" })
-                <div class="col-md-12 col-lg-9">
-                    @Html.TextBoxFor(c => c.Code, new { @class = "form-control row" })
-                    @Html.ValidationMessageFor(c => c.Code, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="mb-3 row">
-                @Html.LabelFor(c => c.Name, new { @class = "form-label col-md-12 col-lg-3" })
-                <div class=" col-md-12 col-lg-9">
-                    @Html.TextBoxFor(c => c.Name, new { @class = "form-control row" })
-                    @Html.ValidationMessageFor(c => c.Name, "", new { @class = "text-danger" })
-                </div>
-            </div>
+        <div class="row my-2">
+            @Html.LabelFor(c => c.Code, new { @class = "col-lg-3" })
+            @Html.TextBoxFor(c => c.Code, new { @class = "col-lg-5 form-control bg-light" })
         </div>
-
-        <div class="mt-3 col-12">
-            <div class="row">
-                @*<button type="submit" class="btn btn-outline-info col-12 col-md-2 mb-2" value="create" onclick="BtnClick()">Create</button>*@
-                <button type="submit" class="btn btn-outline-info col-12 col-md-2 mb-2" value="create" id="createStd">Create</button>
-                @*<input type="submit" class="btn btn-outline-info col-12 col-md-2 mb-2" value="Create" onclick="BtnClick()"/>*@
-                @Html.Raw(@ViewBag.Alert)
-            </div>
+        <div class="row my-2">
+            @Html.LabelFor(c => c.Name, new { @class = "col-lg-3" })
+            @Html.TextBoxFor(c => c.Name, new { @class = "col-lg-5 form-control bg-light", })
+        </div>
+        <div class="row my-2 pt-2 d-lg-flex gap-2">
+            <button class="col-lg-2 btn btn-outline-info text-white" type="submit" id="submitForm">Create</button>
+            <button class="col-lg-2 btn btn-outline-warning text-white" id="clearForm">Clear</button>
         </div>
 
     </div>
 }
 
-@*<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
-@*@Scripts.Render("~/bundles/Ajax")*@
+
 @Scripts.Render("~/bundles/javaScript")
-@*@Scripts.Render(("~/bundles/javaScript"))*@

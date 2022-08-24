@@ -23,21 +23,19 @@ namespace StudentRegistration
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new Bundle("~/bundles/bootstrap").Include(
-                "~/Scripts/bootstrap.js",
-                "~/Scripts/bootstrap.bundle.min.js",
                 "~/Scripts/bootstrap.min.js"
                 ));
 
+            bundles.Add(new Bundle("~/bundles/unobtrusive-ajax").Include(
+                "~/Scripts/jquery.unobtrusive-ajax.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/javaScript").Include(
-                "~/Scripts/jquery.unobtrusive-ajax.js",
-                "~/Scripts/jquery.validate.min.js",
-                "~/Scripts/jquery.validate.unobtrusive.min.js",
                 "~/scripts/My_JS/academicClass.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                "~/Content/bootstrap.css", 
-                "~/Content/bootstrap.min.css", 
-                "~/Content/site.css", 
+                "~/Content/bootstrap.css",
+                "~/Content/bootstrap.min.css",
+                "~/Content/site.css",
                 "~/Content/MyContent/MyCSS.css"));
 
         }

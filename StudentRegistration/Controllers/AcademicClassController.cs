@@ -30,32 +30,9 @@ namespace StudentRegistration.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(AcademicClass classData)
         {
-            _class.Code = Convert.ToString(Request.QueryString["codeJS"]);
-            _class.Name = Convert.ToString(Request.QueryString["nameJS"]);
-
-            classData = _class;
-
-            var singleData = new AcademicClass();
-            var dataList = _academicClassBll.Classes();
-
-            singleData = dataList.Where(c => c.Code == classData.Code).FirstOrDefault();
-            if (singleData.Code != classData.Code && singleData.Name != classData.Name)
-            {
-                if (!ModelState.IsValid)
-                {
-                    _academicClassBll.AddClass(classData);
-                    ViewBag.Alert = ServeAlert.ShowAlart(Alert.Success, "Data Added Bandhu..");
-                    return View();
-                }
-                else
-                {
-                    ViewBag.Alert = ServeAlert.ShowAlart(Alert.Danger, "Data Add Process failed Bandhu..");
-                }
-
-            }
-            ViewBag.Alert = ServeAlert.ShowAlart(Alert.Danger, "Your data was matching with another data");
             return View();
         }
+
 
     }
 }
