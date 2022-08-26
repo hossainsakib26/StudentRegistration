@@ -28,3 +28,34 @@ function BtnClick() {
 
     return null;
 }
+
+document.getElementById("Code").addEventListener("change", getCodeValue);
+
+var xmlHttpRequest;
+function getCodeValue() {
+    console.log(this.value);
+
+    const classCode = document.getElementById("Code").value;
+
+    const url = "https://localhost:44383/AcademicClass/ExistsCode?code="+classCode+"";
+
+    xmlHttpRequest = new XMLHttpRequest();
+    
+    xmlHttpRequest.open("GET", url, true);
+
+    //xmlHttpRequest.onreadystatechange = responseData;
+
+    xmlHttpRequest.onload = () => {
+        console.log(this.status);
+        console.log(this.readyState);
+        const data = xmlHttpRequest.response;
+        console.log(JSON.stringify(data));
+    }
+
+    xmlHttpRequest.send();
+
+    function responseData() {
+        console.log(this.value);
+    }
+
+}
