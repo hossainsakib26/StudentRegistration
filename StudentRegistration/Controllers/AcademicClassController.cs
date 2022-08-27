@@ -32,12 +32,15 @@ namespace StudentRegistration.Controllers
         {
             try
             {
-                ExistsCode(classData.Code);
-
                 if (!ModelState.IsValid)
                 {
-                    _academicClassBll.AddClass(classData);
-                    return View();
+                    if (!IsExistsCode(classData.Code))
+                    {
+                        _academicClassBll.AddClass(classData);
+                        return View();
+                    }
+
+                    return View(classData);
                 }
             }
             catch (Exception e)
@@ -48,9 +51,8 @@ namespace StudentRegistration.Controllers
         }
 
         //[NonAction]
-        public bool ExistsCode(string code)
+        public bool IsExistsCode(string code)
         {
-
             var dataList = _academicClassBll.Classes();
             //var singleData = new AcademicClass();
             var singleData = dataList.FirstOrDefault(c => c.Code == code);

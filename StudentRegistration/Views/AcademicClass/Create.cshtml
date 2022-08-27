@@ -7,34 +7,37 @@
 
 @using (Ajax.BeginForm("Create", "AcademicClass", new AjaxOptions()
 {
-    //OnSuccess = "fnSuccess",
-    //OnFailure = "fnFailure",
+    OnSuccess = "fnSuccess",
+    OnFailure = "fnFailure",
     HttpMethod = "POST"
 
-}, Model))
+}))
 {
 
     <div class="col m-sm-0 m-lg-4 p-lg-4" style="background-color: #3c4a5c; color: aliceblue; padding: 20px;">
 
         <div class="row border-bottom border-3">
-            <h3 class="fs-4 text-white">Create A Class</h3>
-        </div>
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(c => c.ID)
-        <div class="row my-2 p-2">
+            <h3 class="col-lg-2 fs-4 text-white">Create A Class</h3>
             <label id="getMessage"></label>
         </div>
+        
+        @Html.AntiForgeryToken()
+        
+        @Html.HiddenFor(c => c.ID)
+
         <div class="row my-2">
-            @Html.LabelFor(c => c.Code, new { @class = "col-lg-3" })
+            @Html.LabelFor(c => c.Code, new { @class = "col-lg-3", id = "code"})
             @Html.TextBoxFor(c => c.Code, new { @class = "col-lg-5 form-control bg-light" })
         </div>
+        
         <div class="row my-2">
-            @Html.LabelFor(c => c.Name, new { @class = "col-lg-3" })
+            @Html.LabelFor(c => c.Name, new { @class = "col-lg-3", id = "name" })
             @Html.TextBoxFor(c => c.Name, new { @class = "col-lg-5 form-control bg-light"})
         </div>
+        
         <div class="row my-2 pt-2 d-lg-flex gap-2">
             <button class="col-lg-2 btn btn-outline-info text-white" type="submit" id="submitForm">Create</button>
-            <button class="col-lg-2 btn btn-outline-warning text-white" id="clearForm">Clear</button>
+            <input class="col-lg-2 btn btn-outline-warning text-white" id="clearForm" value="Clear" type="button"/>
         </div>
 
     </div>
