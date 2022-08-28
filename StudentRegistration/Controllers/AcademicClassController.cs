@@ -34,7 +34,7 @@ namespace StudentRegistration.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    if (!IsExistsCode(classData.Code))
+                    if (!IsExistsCode(classData.Code) && !IsExistsName(classData.Name))
                     {
                         _academicClassBll.AddClass(classData);
                         return View();
@@ -56,6 +56,20 @@ namespace StudentRegistration.Controllers
             var dataList = _academicClassBll.Classes();
             //var singleData = new AcademicClass();
             var singleData = dataList.FirstOrDefault(c => c.Code == code);
+
+            if (singleData != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        //[NonAction]
+        public bool IsExistsName(string name)
+        {
+            var dataList = _academicClassBll.Classes();
+            //var singleData = new AcademicClass();
+            var singleData = dataList.FirstOrDefault(c => c.Name == name);
 
             if (singleData != null)
             {
