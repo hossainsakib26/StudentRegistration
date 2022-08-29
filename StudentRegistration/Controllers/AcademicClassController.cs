@@ -22,8 +22,16 @@ namespace StudentRegistration.Controllers
             var classes = _academicClassBll.Classes();
             return View(classes);
         }
-        public ActionResult Create()
+        public ActionResult Create(bool isSaveSuccess = false)
         {
+            if (isSaveSuccess)
+            {
+                ViewBag.isSaveSuccess = true;
+            }
+            else
+            {
+                ViewBag.isSaveSuccess = false;
+            }
             return View();
         }
         [HttpPost]
