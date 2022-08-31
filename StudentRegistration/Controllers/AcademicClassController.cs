@@ -12,14 +12,22 @@ namespace StudentRegistration.Controllers
 {
     public class AcademicClassController : Controller
     {
-        private AcademicClassBLL _academicClassBll = new AcademicClassBLL();
-        private AcademicClass _class = new AcademicClass();
+        private readonly AcademicClassBLL classBll;
+        private readonly AcademicClass aClass;
+        private readonly ValidationChecker checker;
+
+        public AcademicClassController(AcademicClassBLL academicClassBll, AcademicClass academicClass, ValidationChecker validation)
+        {
+            classBll = academicClassBll;
+            aClass = academicClass;
+            validation = checker;
+        }
 
         // GET: AcademicClass
         [HttpGet]
         public ActionResult ClassList()
         {
-            var classes = _academicClassBll.Classes();
+            var classes = classBll.Classes();
             return View(classes);
         }
         public ActionResult Create(bool isSaveSuccess = false)
@@ -44,7 +52,7 @@ namespace StudentRegistration.Controllers
                 {
                     if (!IsExistsCode(classData.Code) && !IsExistsName(classData.Name))
                     {
-                        _academicClassBll.AddClass(classData);
+                        classBll.AddClass(classData);
                         return View();
                     }
 
@@ -61,29 +69,24 @@ namespace StudentRegistration.Controllers
         //[NonAction]
         public bool IsExistsCode(string code)
         {
-            var dataList = _academicClassBll.Classes();
+            var dataList = academicClassBll.Classes();
             //var singleData = new AcademicClass();
             var singleData = dataList.FirstOrDefault(c => c.Code == code);
-
-            if (singleData != null)
-            {
-                return true;
-            }
-            return false;
+            
+            //if (singleData != null)
+            //{
+            //    return true;
+            //}
+            //return false;
+            return checker.HasValueInObject(singleData);
         }
 
         //[NonAction]
         public bool IsExistsName(string name)
-        {
-            var dataList = _academicClassBll.Classes();
-            //var singleData = new AcademicClass();
+        { var dataList = academicClassBll.Classes();
+            checker.HasObjectInArray(dataList); 
             var singleData = dataList.FirstOrDefault(c => c.Name == name);
-
-            if (singleData != null)
-            {
-                return true;
-            }
-            return false;
+            return checker.HasValueInObject(singleData);
         }
 
     }
