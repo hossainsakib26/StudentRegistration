@@ -75,7 +75,7 @@ function getCodeValue() {
 
         function responseData() {
             if (this.readyState === xmlHttpRequest.DONE && this.status === 200) {
-    
+
                 xmlHttpRequest.onload = () => {
                     //console.log(this.status);
                     //console.log(this.readyState);
@@ -92,13 +92,9 @@ function getCodeValue() {
                         : (codeLabel.setAttribute("class", "bi bi-check-circle text-success"));
 
                     var submitBtn = document.getElementById("submitForm");
-                    (data === "true")
-                        ? (submitBtn.disabled = false)
-                        : (submitBtn.disabled = true);
-
-                    //(data === "true")
-                    //    ? (submitBtn.setAttribute("disabled", ""))
-                    //    : (submitBtn.setAttribute("disabled", "disabled"));
+                    (data === "True")
+                        ? (submitBtn.disabled = true)
+                        : (submitBtn.disabled = false);
 
                 }
             }
@@ -113,12 +109,11 @@ function getCodeValue() {
 document.getElementById("Name").addEventListener("change", getNameValue);
 
 function getNameValue() {
-    console.log(this.value);
 
     const className = document.getElementById("Name").value;
     const nameLabel = document.getElementById("name");
 
-    const url = "https://localhost:44383/AcademicClass/IsExistsName?name=" + className + "";
+    const url = "https://localhost:44383/AcademicClass/IsExistsName?name=" + this.value + "";
 
     xmlHttpRequest = new XMLHttpRequest();
 
@@ -130,7 +125,6 @@ function getNameValue() {
 
     function responseData() {
         if (this.readyState === xmlHttpRequest.DONE && this.status === 200) {
-            console.log(this.value);
 
             xmlHttpRequest.onload = () => {
                 //console.log(this.status);
@@ -148,9 +142,10 @@ function getNameValue() {
                     : (nameLabel.setAttribute("class", "text-success"));
 
                 var submitBtn = document.getElementById("submitForm");
-                (data === "true")
-                    ? (submitBtn.setAttribute("disabled", ""))
-                    : (submitBtn.setAttribute("disabled", "disabled"));
+                (data === "True")
+                    ? (submitBtn.disabled = true)
+                    : (submitBtn.disabled = false);
+
             }
         }
 
