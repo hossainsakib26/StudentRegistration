@@ -42,6 +42,8 @@ var baseURL = "https://localhost:44383/AcademicClass/";
 document.getElementById("clearForm").addEventListener("click", clearValues);
 
 function clearValues() {
+
+    document.getElementById("submitForm").disabled = false;
     document.getElementById("Code").value = "";
     document.getElementById("Name").value = "";
     document.getElementById("code").innerText = "Code";
@@ -51,6 +53,7 @@ function clearValues() {
     var msgData = document.getElementById("getMessage");
     msgData.innerText = "";
     msgData.setAttribute("class", "");
+
 }
 
 document.getElementById("Code").addEventListener("change", getCodeValue);
@@ -150,4 +153,11 @@ function getNameValue() {
         }
 
     }
+}
+
+document.getElementById("ajaxBeginFormForClass").addEventListener("submit", checkValidation);
+
+function checkValidation() {
+    var formElements = document.getElementById("ajaxBeginFormForClass");
+
 }
