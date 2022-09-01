@@ -1,6 +1,4 @@
-﻿var submitBtn = document.getElementById("submitForm");
-
-
+﻿
 function fnSuccess(obj) {
     if (obj.Code !== "" && obj.Name !== "") {
         var msgData = document.getElementById("getMessage");
@@ -58,45 +56,56 @@ function clearValues() {
 document.getElementById("Code").addEventListener("change", getCodeValue);
 
 function getCodeValue() {
-    console.log(this.value);
+    //console.log(this.value);
 
     const classCode = document.getElementById("Code").value;
     const codeLabel = document.getElementById("code");
 
-    const url = "https://localhost:44383/AcademicClass/IsExistsCode?code="+classCode+"";
+    if (this.value.length > 0) {
 
-    xmlHttpRequest = new XMLHttpRequest();
+        const url = "https://localhost:44383/AcademicClass/IsExistsCode?code=" + this.value + "";
+
+        xmlHttpRequest = new XMLHttpRequest();
+
+        xmlHttpRequest.open("GET", url, true);
+
+        xmlHttpRequest.onreadystatechange = responseData;
+
+        xmlHttpRequest.send();
+
+        function responseData() {
+            if (this.readyState === xmlHttpRequest.DONE && this.status === 200) {
     
-    xmlHttpRequest.open("GET", url, true);
+                xmlHttpRequest.onload = () => {
+                    //console.log(this.status);
+                    //console.log(this.readyState);
+                    const data = xmlHttpRequest.response;
+                    console.log(JSON.stringify(data));
+                    codeLabel.innerText = "Code";
 
-    xmlHttpRequest.onreadystatechange = responseData;
-    
-    xmlHttpRequest.send();
+                    codeLabel.innerText = (data === "True")
+                        ? ("Code " + classCode + " is exists")
+                        : ("Code " + classCode + " is available");
 
-    function responseData() {
-        if (this.readyState === xmlHttpRequest.DONE && this.status === 200) {
-            console.log(this.value);
+                    (data === "True")
+                        ? (codeLabel.setAttribute("class", "text-danger"))
+                        : (codeLabel.setAttribute("class", "bi bi-check-circle text-success"));
 
-            xmlHttpRequest.onload = () => {
-                console.log(this.status);
-                console.log(this.readyState);
-                const data = xmlHttpRequest.response;
-                console.log(JSON.stringify(data));
-                codeLabel.innerText = "Code";
+                    var submitBtn = document.getElementById("submitForm");
+                    (data === "true")
+                        ? (submitBtn.disabled = false)
+                        : (submitBtn.disabled = true);
 
-                codeLabel.innerText = (data === "True")
-                    ? ("Code " + classCode + " is exists")
-                    : ("Code " + classCode + " is available");
+                    //(data === "true")
+                    //    ? (submitBtn.setAttribute("disabled", ""))
+                    //    : (submitBtn.setAttribute("disabled", "disabled"));
 
-                (data === "True")
-                    ? (codeLabel.setAttribute("class", "text-danger"))
-                    : (codeLabel.setAttribute("class", "bi bi-check-circle text-success"));
-
-                (data === "true") ? (submitBtn.disable = false) : (submitBtn.disable = true);
-
+                }
             }
+
         }
-        
+
+
     }
 
 }
@@ -124,8 +133,8 @@ function getNameValue() {
             console.log(this.value);
 
             xmlHttpRequest.onload = () => {
-                console.log(this.status);
-                console.log(this.readyState);
+                //console.log(this.status);
+                //console.log(this.readyState);
                 const data = xmlHttpRequest.response;
                 console.log(JSON.stringify(data));
                 nameLabel.innerText = "Code";
@@ -138,7 +147,10 @@ function getNameValue() {
                     ? (nameLabel.setAttribute("class", "text-danger"))
                     : (nameLabel.setAttribute("class", "text-success"));
 
-                (data === "true") ? (submitBtn.disable = false) : (submitBtn.disable = true);
+                var submitBtn = document.getElementById("submitForm");
+                (data === "true")
+                    ? (submitBtn.setAttribute("disabled", ""))
+                    : (submitBtn.setAttribute("disabled", "disabled"));
             }
         }
 

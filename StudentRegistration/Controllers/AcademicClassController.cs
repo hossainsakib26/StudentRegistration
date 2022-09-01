@@ -44,18 +44,18 @@ namespace StudentRegistration.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(AcademicClass classData)
+        public ActionResult Create(AcademicClass classData, bool isSaveSuccess = false)
         {
             try
             {
                 if (!ModelState.IsValid)
                 {
-                    if (!IsExistsCode(classData.Code) && !IsExistsName(classData.Name))
+                    if (IsExistsCode(classData.Code) && IsExistsName(classData.Name))
                     {
                         _classBll.AddClass(classData);
-                        return View();
+                        return RedirectToAction("Create", isSaveSuccess = true);
                     }
-                    return View(classData);
+                    return View();
                 }
             }
             catch (Exception e)
