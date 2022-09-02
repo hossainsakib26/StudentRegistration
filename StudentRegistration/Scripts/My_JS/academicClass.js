@@ -13,7 +13,7 @@ function fnSuccess(obj) {
 function fnFailure() {
     var msgData = document.getElementById("getMessage");
     msgData.innerText = "Wouldn't send to controller action.";
-    msgData.setAttribute("class", "text-light bg-danger");
+    msgData.setAttribute("class", "col-lg-8 text-center text-light bg-danger");
 }
 
 document.getElementById("submitForm").addEventListener("click", BtnClick);
@@ -28,7 +28,8 @@ function BtnClick() {
             Code: code,
             Name: name
         }
-        fnSuccess(data);
+        //fnSuccess(data);
+        //clearValues();
     }
 
     return null;
@@ -158,6 +159,6 @@ function getNameValue() {
 document.getElementById("ajaxBeginFormForClass").addEventListener("submit", checkValidation);
 
 function checkValidation() {
-    var formElements = document.getElementById("ajaxBeginFormForClass");
+
 
 }
