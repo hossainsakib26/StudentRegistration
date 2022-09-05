@@ -54,14 +54,16 @@ namespace StudentRegistration.Controllers
                     {
                         _classBll.AddClass(classData);
                         ViewBag.ClassData = classData;
-                        ViewBag.SuccessMsg = "" + classData.Code + " & " + classData.Name + " is added";
-                        ModelState.Clear();
-                        return View(new AcademicClass());
+                        //ViewBag.SuccessMsg = "" + classData.Code + " & " + classData.Name + " is added";
+                        ViewBag.SuccessMsg = "Data is added";
+
+                        return View();
                     }
                 }
                 else
                 {
-                    ViewBag.FailedMsg = "" + classData.Code + " & " + classData.Name + " isn't added";
+                    //ViewBag.FailedMsg = "" + classData.Code + " & " + classData.Name + " isn't added";
+                    ViewBag.FailedMsg = "Data isn't added";
                 }
                 
             }
@@ -78,7 +80,7 @@ namespace StudentRegistration.Controllers
             var dataList = _classBll.Classes();
             if (_validation.HasObjectInArray(dataList))
             {
-                var singleData = dataList.FirstOrDefault(c => c.Code == code);
+                var singleData = dataList.Where(c => c.Code == code).FirstOrDefault();
                 return _validation.HasValueInObject(singleData);
             }
             return false;
@@ -89,7 +91,7 @@ namespace StudentRegistration.Controllers
         {
             var dataList = _classBll.Classes();
             _validation.HasObjectInArray(dataList);
-            var singleData = dataList.FirstOrDefault(c => c.Name == name);
+            var singleData = dataList.Where(c => c.Name == name).FirstOrDefault();
             return _validation.HasValueInObject(singleData);
         }
 

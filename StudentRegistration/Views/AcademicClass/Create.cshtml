@@ -4,7 +4,6 @@
     ViewBag.Title = "Academic Class Create";
 }
 
-
 @using (Ajax.BeginForm("Create", "AcademicClass", new AjaxOptions()
 {
     //OnSuccess = "fnSuccess",
@@ -20,23 +19,26 @@
         <div class="row border-bottom border-3">
             <h3 class="col-lg-2 fs-4 text-white">Create A Class</h3>
             @*<label id="getMessage"></label>*@
-
-            @if (ViewBag.FailedMsg != null)
-            {
-                <p class="col-lg-8 text-center text-light bg-danger">@ViewBag.FailedMsg</p>
-                @*<div class="alert alert-danger col-lg-8 text-center text-light bg-success" role="alert">
+            @{
+                if (ViewBag.FailedMsg != null)
+                {
+                    <div class="col-lg-8 text-center text-light bg-danger">
                         @ViewBag.FailedMsg
-                    </div>*@
-            }
-
-            @if (ViewBag.SuccessMsg != null)
-            {
-                <p class="col-lg-8 text-center text-light bg-success">@ViewBag.SuccessMsg</p>
-                @*<div class="alert alert-primary col-lg-8 text-center text-light bg-success" role="alert">
+                    </div>
+                    @*<div class="alert alert-danger col-lg-8 text-center text-light bg-success" role="alert">
+                    @ViewBag.FailedMsg
+                </div>*@
+                }
+                if (ViewBag.SuccessMsg != null)
+                {
+                    <div class="col-lg-8 text-center text-light bg-success">
                         @ViewBag.SuccessMsg
-                    </div>*@
+                    </div>
+                    @*<div class="alert alert-primary col-lg-8 text-center text-light bg-success" role="alert">
+                    @ViewBag.SuccessMsg
+                </div>*@
+                }
             }
-
         </div>
 
         @Html.AntiForgeryToken()
