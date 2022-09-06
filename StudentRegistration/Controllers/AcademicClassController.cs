@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using StudentRegistration.BLL;
 using StudentRegistration.Models;
-using StudentRegistration.Models.Enums;
 using StudentRegistration.Services;
 
 namespace StudentRegistration.Controllers
@@ -42,34 +39,23 @@ namespace StudentRegistration.Controllers
             }
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(AcademicClass classData)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                if (!ModelState.IsValid)
+                if (!IsExistsCode(classData.Code) && !IsExistsName(classData.Name))
                 {
-                    if(!IsExistsCode(classData.Code) && !IsExistsName(classData.Name))
-                    {
-                        _classBll.AddClass(classData);
-                        ViewBag.ClassData = classData;
-                        //ViewBag.SuccessMsg = "" + classData.Code + " & " + classData.Name + " is added";
-                        ViewBag.SuccessMsg = "Data is added";
-
-                        return View();
-                    }
+                    _classBll.AddClass(classData);
+                    ViewBag.SuccessMsg = "" + classData.Code + " & " + classData.Name + " is added";
+                    return View(classData);
                 }
-                else
-                {
-                    //ViewBag.FailedMsg = "" + classData.Code + " & " + classData.Name + " isn't added";
-                    ViewBag.FailedMsg = "Data isn't added";
-                }
-                
             }
-            catch (Exception e)
+            else
             {
-                Console.WriteLine(e);
+                ViewBag.FailedMsg = "" + classData.Code + " & " + classData.Name + " isn't added";
             }
             return View();
         }
