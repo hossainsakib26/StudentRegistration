@@ -17,6 +17,9 @@ namespace StudentRegistration.Controllers
         {
             ViewBag.Message = "Your application description page.";
 
+            string human = "Sazzad";
+            ViewBag.Human = human;
+
             return View();
         }
 

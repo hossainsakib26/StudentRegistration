@@ -1,9 +1,9 @@
-﻿using System;
-using System.Linq;
-using System.Web.Mvc;
-using StudentRegistration.BLL;
+﻿using StudentRegistration.BLL;
 using StudentRegistration.Models;
 using StudentRegistration.Services;
+using System;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace StudentRegistration.Controllers
 {
@@ -27,16 +27,9 @@ namespace StudentRegistration.Controllers
             var classes = _classBll.Classes();
             return View(classes);
         }
-        public ActionResult Create(bool isSaveSuccess = false)
+        public ActionResult Create()
         {
-            if (isSaveSuccess)
-            {
-                ViewBag.isSaveSuccess = true;
-            }
-            else
-            {
-                ViewBag.isSaveSuccess = false;
-            }
+            ViewBag.test = "test";
             return View();
         }
 
@@ -49,13 +42,17 @@ namespace StudentRegistration.Controllers
                 if (!IsExistsCode(classData.Code) && !IsExistsName(classData.Name))
                 {
                     _classBll.AddClass(classData);
-                    ViewBag.SuccessMsg = "" + classData.Code + " & " + classData.Name + " is added";
+                    //string sMsg = "" + classData.Code + " & " + classData.Name + " is added";
+                    //ViewBag.SuccessMsg = Convert.ToString(sMsg);
+                    ViewBag.isDataSave = "Data Save Successfully!";
+
                     return View(classData);
                 }
             }
             else
             {
-                ViewBag.FailedMsg = "" + classData.Code + " & " + classData.Name + " isn't added";
+                string fMsg = "" + classData.Code + " & " + classData.Name + " isn't added";
+                ViewBag.FailedMsg = Convert.ToString(fMsg);
             }
             return View();
         }

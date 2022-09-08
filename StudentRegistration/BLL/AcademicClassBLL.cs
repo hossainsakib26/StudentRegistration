@@ -6,7 +6,12 @@ namespace StudentRegistration.BLL
 {
     public class AcademicClassBLL
     {
-        private AcademicClassDAL _academicClassDAL = new AcademicClassDAL();
+        private AcademicClassDAL _academicClassDAL;
+
+        public AcademicClassBLL()
+        {
+            _academicClassDAL = new AcademicClassDAL();
+        }
 
         public ICollection<AcademicClass> Classes()
         {
