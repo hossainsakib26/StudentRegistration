@@ -1,8 +1,69 @@
-﻿
+﻿@*@model IEnumerable<StudentRegistration.Models.AcademicClass>*@
+@model ICollection<StudentRegistration.Models.AcademicClass>
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
 
+<div class="card my-2">
+    @* head *@
+    <div class="card-body d-flex flex-column gap-2">
+
+        <div class="d-flex justify-content-between border-bottom pb-2">
+            <h3 class="card-title">@ViewBag.IndexName</h3>
+            <button class="btn btn-primary"><i class="bi bi-plus-square-fill"></i> Add New</button>
+        </div>
+
+        @* body *@
+        <form class="d-flex justify-content-center align-items-center gap-2">
+            <input type="text" class="form-control" id="searchData" placeholder="Search data" />
+            <button class="btn btn-primary" type="submit" id="submitButton"><i class="bi bi-search"></i></button>
+        </form>
+
+        @{
+            int sl = 1;
+        }
+
+        <div class="d-flex justify-content-center align-items-center">
+            <table class="table table-striped">
+
+                @foreach (var item in Model)
+                {
+
+                    <tr>
+                        <td>@sl</td>
+                        <td>
+                            @Html.DisplayFor(c => item.Code)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(c => item.Name)
+                        </td>
+                        <td class="d-flex gap-2">
+                            <!--<button class="btn btn-info" id="btn-edit">
+                                <i class="bi bi-pencil-square"></i>-->
+                            @*@Html.ActionLink("Edit", "Edit", new { id = item.ID })*@
+                            <!--</button>
+                            <button class="btn btn-secondary" id="btn-details">
+                                <i class="bi bi-card-text"></i>-->
+                            @*@Html.ActionLink("Details", "Details", new { id = item.ID })*@
+                            <!--</button>
+                            <button class="btn btn-danger" id="btn-delete" onclick="">
+                                <i class="bi bi-trash"></i>-->
+                            @*@Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+                            <!--</button>-->
+                            @Html.ActionLink("Edit", "AcadClass", new { id = "" + item.ID + "" }, new { @class = "bi bi-pencil-square" })
+                        </td>
+                    </tr>
+
+                    sl++;
+                }
+            </table>
+        </div>
+
+    </div>
+</div>
+
+
+@Scripts.Render("~/bundles/rout-changer")

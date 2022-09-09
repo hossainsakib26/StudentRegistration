@@ -1,4 +1,7 @@
-﻿using System;
+﻿using StudentRegistration.BLL;
+using StudentRegistration.Models;
+using StudentRegistration.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,8 +11,43 @@ namespace StudentRegistration.Controllers
 {
     public class AcadClassController : Controller
     {
+        private AcademicClass _class;
+        private AcademicClassBLL _bll;
+        private ValidationChecker _checker;
+
+        public AcadClassController()
+        {
+            _class = new AcademicClass();
+            _bll = new AcademicClassBLL();
+            _checker = new ValidationChecker();
+        }
+
         // GET: AcadClass
         public ActionResult Index()
+        {
+            ViewBag.IndexName = "Classes";
+            var classes = _bll.Classes();
+            return View(classes);
+        }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(AcademicClass obj)
+        {
+            return View();
+        }
+
+        public ActionResult Details(long id)
+        {
+            return View();
+        }
+
+        public ActionResult Edit(long id)
         {
             return View();
         }
