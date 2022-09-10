@@ -1,9 +1,47 @@
-﻿
+﻿@model StudentRegistration.Models.AcademicClass
 
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+<div class="card my-2">
+    @* head *@
+    <div class="card-body d-flex flex-column gap-2">
 
+        <div class="d-flex justify-content-between border-bottom">
+            <p class="fs-3">@ViewBag.FormName</p>
+            @*<button class="btn btn-primary" id="addNewClassBtn"><i class="bi bi-plus-square-fill"></i> Add New</button>*@
+        </div>
+
+        @* body *@
+        @using (Html.BeginForm("Create", "AcadClass", FormMethod.Post, new { @class = "p-2 d-flex flex-column gap-4", id = "createBeginForm" }))
+        {
+            <div class="d-flex flex-column gap-2">
+
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(c => c.ID)
+
+                <div class="d-flex flex-column w-100">
+                    @Html.LabelFor(c => c.Code, new { @class = "fs-5", id = "CodeLbl" })
+                    @Html.TextBoxFor(c => c.Code, new { @class = "form-control w-100" })
+                    @Html.ValidationMessageFor(c => c.Code)
+                </div>
+                <div class="d-flex flex-column w-100">
+                    @Html.LabelFor(c => c.Name, new { @class = "fs-5", id = "NameLbl" })
+                    @Html.TextBoxFor(c => c.Name, new { @class = "form-control w-100" })
+                    @Html.ValidationMessageFor(c => c.Name)
+                </div>
+
+            </div>
+
+            <div class="card-footer">
+                <input type="button" class="btn btn-info" id="submitBtn" value="Submit"/>
+                @*<button></button>*@
+            </div>
+        }
+
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/acad-class-js")

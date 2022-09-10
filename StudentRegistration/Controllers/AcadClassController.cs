@@ -29,16 +29,21 @@ namespace StudentRegistration.Controllers
             var classes = _bll.Classes();
             return View(classes);
         }
-
+        
         [HttpGet]
         public ActionResult Create()
         {
+            ViewBag.FormName = "Create Form";
             return View();
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(AcademicClass obj)
         {
+
+            string name = obj.Name;
+
             return View();
         }
 
