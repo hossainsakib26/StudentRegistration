@@ -38,7 +38,7 @@ namespace StudentRegistration.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult Create(AcademicClass obj)
         {
 
