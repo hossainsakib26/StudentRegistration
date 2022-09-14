@@ -41,9 +41,6 @@ namespace StudentRegistration.Controllers
         //[ValidateAntiForgeryToken]
         public ActionResult Create(AcademicClass obj)
         {
-
-            string name = obj.Name;
-
             return View();
         }
 
