@@ -16,7 +16,6 @@ var getLabelName = document.getElementById("NameLbl");
 var getInputName = document.getElementById("Name");
 var getFormValue = document.getElementById("createBeginForm");
 
-//var baseUrl = "https://localhost:44383/AcadClass/";
 var baseUrl = "/AcadClass/";
 
 getSubmitBtn.addEventListener("click", submitForm);
@@ -26,7 +25,6 @@ function submitForm() {
     let codeData = getInputCode.value;
     let nameData = getInputName.value;
 
-    
     let acadClassData = setAcadClassValue(codeData, nameData);
     let objJson = JSON.stringify(acadClassData);
 
@@ -35,8 +33,7 @@ function submitForm() {
     console.log(urlQueryString);
 
     let typeMethod = "POST";
-    //let requestUrl = baseUrl + "Create?obj=" + acadClassData + "";
-    //let requestUrl = baseUrl + "Create?obj=";
+
     let requestUrl = baseUrl + "Create";
 
     requestAjax(typeMethod, requestUrl, urlQueryString);
@@ -64,8 +61,7 @@ function requestAjax(rqstType, rqstUrl, objData) {
 
         if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
             // Get and convert the responseText into JSON
-            var response = JSON.parse(xmlHttpRqst.responseText);
-            console.log(response);
+
         }
 
     }
