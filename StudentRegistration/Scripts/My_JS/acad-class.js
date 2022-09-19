@@ -3,32 +3,34 @@
     id = 0;
     code = "";
     name = "";
-
+    __RequestVerificationToken = "" | null;
 }
 
 var xmlHttpRqst;
 
-var getToken = document.getElementsByName("__RequestVerificationToken");
-var getSubmitBtn = document.getElementById("submitBtn");
+var baseUrl = "/AcadClass/";
+
+var getToken = document.querySelector("input[name=__RequestVerificationToken]"); //get a field value without id, class and tag name
 var getLabelCode = document.getElementById("CodeLbl");
 var getInputCode = document.getElementById("Code");
 var getLabelName = document.getElementById("NameLbl");
 var getInputName = document.getElementById("Name");
 var getFormValue = document.getElementById("createBeginForm");
 
-var baseUrl = "/AcadClass/";
+var getSubmitBtn = document.getElementById("submitBtn");
 
 getSubmitBtn.addEventListener("click", submitForm);
 
 function submitForm() {
 
-    let codeData = getInputCode.value;
-    let nameData = getInputName.value;
-
-    let acadClassData = setAcadClassValue(codeData, nameData);
+    // return a object
+    let acadClassData = setAcadClassValueWithToken();
+    // make it string json
     let objJson = JSON.stringify(acadClassData);
 
-    let urlQueryString = new URLSearchParams(acadClassData).toString();
+    // make a querystring parameter
+    let urlQueryString = new URLSearchParams(acadClassData).toString(); 
+
     console.log(objJson);
     console.log(urlQueryString);
 
@@ -36,44 +38,50 @@ function submitForm() {
 
     let requestUrl = baseUrl + "Create";
 
+    //for sending json data but it works with antyforgerytoken.
     requestAjax(typeMethod, requestUrl, urlQueryString);
-    //requestAjax(typeMethod, requestUrl, objJson);
+    //for sending json data but it didnt work with antyforgerytoken. 
+    //requestAjax(typeMethod, requestUrl, objJson); 
 
 }
 
-function requestAjax(rqstType, rqstUrl, objData) {
+function requestAjax(methodType, rqstUrl, objData) {
 
     xmlHttpRqst = new XMLHttpRequest();
 
-    xmlHttpRqst.open(rqstType, rqstUrl, true);
+    xmlHttpRqst.open(methodType, rqstUrl, true);
 
-    xmlHttpRqst.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    //add this when you need to submit a form data. 
+    xmlHttpRqst.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=utf-8");
+
+    //this header is only using for json data.
     //xmlHttpRqst.setRequestHeader("Content-type", "application/json");
 
-    (rqstType === "POST" && objData) ? xmlHttpRqst.send(objData) : xmlHttpRqst.send();;
+    (methodType === "POST" && objData) ? xmlHttpRqst.send(objData) : xmlHttpRqst.send();
 
     xmlHttpRqst.onload = getResponses;
 
-    function getResponses() {
-
-        console.log(this.readyState);
-        console.log(this.status);
-
-        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-            // Get and convert the responseText into JSON
-
-        }
-
-    }
 }
 
 
+function getResponses() {
 
-function setAcadClassValue(data1, data2) {
+    console.log(this.readyState);
+    console.log(this.status);
 
+    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        // Get and convert the responseText into JSON
+
+    }
+
+}
+
+function setAcadClassValueWithToken() {
+    
     let classData = new acadClass();
-    classData.code = data1;
-    classData.name = data2;
+    classData.code = getInputCode.value;
+    classData.name = getInputName.value;
+    classData.__RequestVerificationToken = getToken.value;
 
     console.log(classData);
     return classData;
