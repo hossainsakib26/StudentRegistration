@@ -16,6 +16,7 @@ var getInputCode = document.getElementById("Code");
 var getLabelName = document.getElementById("NameLbl");
 var getInputName = document.getElementById("Name");
 var getFormValue = document.getElementById("createBeginForm");
+var confirmationMsg = document.getElementById("msg");
 
 var getSubmitBtn = document.getElementById("submitBtn");
 
@@ -70,8 +71,9 @@ function getResponses() {
     console.log(this.status);
 
     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-        // Get and convert the responseText into JSON
-
+        confirmationMsg.textContent = "Data added Successfully!";
+    } else {
+        confirmationMsg.textContent = "Failed!";
     }
 
 }
