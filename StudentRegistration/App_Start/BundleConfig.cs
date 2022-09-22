@@ -28,6 +28,7 @@ namespace StudentRegistration
             //acadClass
             bundles.Add(new Bundle("~/bundles/rout-changer").Include("~/Scripts/My_JS/route-changer.js"));
             bundles.Add(new Bundle("~/bundles/acad-class-js").Include("~/Scripts/My_JS/acad-class.js"));
+            bundles.Add(new Bundle("~/bundles/data-exists-checker").Include("~/Scripts/My_JS/data-exists-checker.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",

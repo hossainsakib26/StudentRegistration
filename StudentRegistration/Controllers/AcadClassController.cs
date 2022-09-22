@@ -3,6 +3,7 @@ using StudentRegistration.Models;
 using StudentRegistration.Services;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -41,21 +42,23 @@ namespace StudentRegistration.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(AcademicClass acadClass)
         {
-            if (_checker.HasValueInObject(acadClass))
+            try
             {
-                try
+                if (ModelState.IsValid)
                 {
-                    if (ModelState.IsValid)
+                    if (!IsCodeExists(acadClass.Code) && !IsNameExists(acadClass.Name))
                     {
+                        ViewBag.MSG = "Save Success";
                         _bll.AddClass(acadClass);
                         return View(acadClass);
                     }
+                    ViewBag.FMSG = "Save OT Failed";
                     return View();
                 }
-                catch (Exception e)
-                {
-                    throw new Exception(e.Message);
-                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
             return View();
         }
@@ -90,6 +93,17 @@ namespace StudentRegistration.Controllers
                 return _checker.HasValueInObject(singleData);
             }
             return false;
+        }
+
+        public Tuple<string, bool> IsNameExistsTuple(string name)
+        {
+            var dataList = _bll.Classes();
+            if (_checker.HasObjectInArray(dataList))
+            {
+                var singleData = dataList.Where(c => c.Name == name).FirstOrDefault();
+                return Tuple.Create(name, _checker.HasValueInObject(singleData));
+            }
+            return Tuple.Create(name, false);
         }
     }
 }

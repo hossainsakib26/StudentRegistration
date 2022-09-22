@@ -18,6 +18,7 @@ var getInputName = document.getElementById("Name");
 var getFormValue = document.getElementById("createBeginForm");
 var msgDiv = document.getElementById("msg");
 var msgTextElement = document.getElementById("msgText");
+var contentPage = document.getElementById("createContent");
 
 var getSubmitBtn = document.getElementById("submitBtn");
 
