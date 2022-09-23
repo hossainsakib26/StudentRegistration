@@ -89,12 +89,13 @@ namespace StudentRegistration.Controllers
             var dataList = _bll.Classes();
             if (_checker.HasObjectInArray(dataList))
             {
-                var singleData = dataList.Where(c => c.Code == name).FirstOrDefault();
+                var singleData = dataList.Where(c => c.Name == name).FirstOrDefault();
                 return _checker.HasValueInObject(singleData);
             }
             return false;
         }
 
+        //working with nare future inshaAllah
         public Tuple<string, bool> IsNameExistsTuple(string name)
         {
             var dataList = _bll.Classes();

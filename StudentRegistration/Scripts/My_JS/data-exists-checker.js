@@ -8,7 +8,7 @@ var getInputName = document.getElementById("Name");
 var getSubmitBtn = document.getElementById("submitBtn");
 
 getInputCode.addEventListener("change", checkCode);
-getInputName.addEventListener("change", checkNameTuple);
+getInputName.addEventListener("change", checkName);
 
 var xmlHttpRqst;
 
@@ -16,28 +16,23 @@ var baseUrl = "/AcadClass/";
 
 function checkCode() {
     let inputtedCode = getInputCode.value;
-    const fieldName = "code";
-    let backendMethodName = "IsCodeExists";
     if (inputtedCode !== null) {
-        callAjax(inputtedCode, fieldName, backendMethodName);
+        callAjax(inputtedCode, "code", "IsCodeExists");
     }
 }
 
 function checkName() {
     let inputtedName = getInputName.value;
-    const fieldName = "name";
-    let backendMethodName = "IsNameExists";
     if (inputtedName !== null) {
-        callAjax(inputtedName, fieldName, backendMethodName);
+        callAjax(inputtedName, "name", "IsNameExists");
     }
 }
 
+//will working with tuple letter
 function checkNameTuple() {
     let inputtedName = getInputName.value;
-    const fieldName = "name";
-    let backendMethodName = "IsNameExistsTuple";
     if (inputtedName !== null) {
-        callAjax(inputtedName, fieldName, backendMethodName);
+        callAjax(inputtedName, "name", "IsNameExistsTuple");
     }
 }
 
@@ -46,17 +41,39 @@ function callAjax(data, fieldName, backendMethod) {
     xmlHttpRqst = new XMLHttpRequest();
     let url = baseUrl + backendMethod + "?" + fieldName + "=" + data + "";
     xmlHttpRqst.open("GET", url, true);
-    xmlHttpRqst.onreadystatechange = backendResponse;
+    xmlHttpRqst.onreadystatechange = () => {
+        backendResponse(fieldName, xmlHttpRqst);
+    };
     xmlHttpRqst.send();
-
 }
 
-function backendResponse() {
+function backendResponse(fieldName, xmlRqst) {
+    
+    if (xmlRqst.readyState === XMLHttpRequest.DONE && xmlRqst.status === 200) {
 
-    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-        const data = this.response;
-        console.log(data);
+        let isCodeOk;
+        let isNameOk;
+
+        if (fieldName === "name") {
+            afterHttpRqstEffect(fieldName, xmlRqst.response, getLabelName);
+            (xmlRqst.response === "True") ? (isNameOk = false) : (isNameOk = true);
+        }
+
+        if (fieldName === "code") {
+
+            afterHttpRqstEffect(fieldName, xmlRqst.response, getLabelCode);
+            (xmlRqst.response === "True") ? (isCodeOk = false) : (isCodeOk = true);
+        }
+        (isCodeOk === true && isNameOk === true)? (getSubmitBtn.isDisabled = true): (getSubmitBtn.isDisabled = false);
     }
-
 }
 
+function afterHttpRqstEffect(fieldName, response, targatElement) {
+
+    targatElement.innerText = ""+fieldName+"";
+    (response === "True")
+        ? (targatElement.setAttribute("class", "bi bi-x-circle text-danger"))
+        : (targatElement.setAttribute("class", "bi bi-check-circle text-success"));
+
+    targatElement.innerText = (response === "True") ? (" "+fieldName+" is exists") : (" "+fieldName+" is available");
+}
