@@ -10,15 +10,11 @@
     <div class="card-body d-flex flex-column">
 
         <div class="d-flex flex-column flex-md-row justify-content-start align-items-center border-bottom">
-            <p class="fs-3 me-md-3">New Academic Class</p>
+            <p class="fs-3 me-md-3">Add Academic Class</p>
             <div class="" id="msg">
                 <p id="msgText"></p>
             </div>
         </div>
-        
-        @ViewBag.MSG
-        
-        @ViewBag.FMSG
 
         @* body *@
         @using (Html.BeginForm("Create", "AcadClass", FormMethod.Post, new { @class = "p-2 d-flex flex-column gap-4", id = "createBeginForm" }))

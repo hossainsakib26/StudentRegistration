@@ -10,6 +10,9 @@ var getSubmitBtn = document.getElementById("submitBtn");
 getInputCode.addEventListener("change", checkCode);
 getInputName.addEventListener("change", checkName);
 
+let isCodeOk;
+let isNameOk;
+
 var xmlHttpRqst;
 
 var baseUrl = "/AcadClass/";
@@ -48,23 +51,17 @@ function callAjax(data, fieldName, backendMethod) {
 }
 
 function backendResponse(fieldName, xmlRqst) {
-    
     if (xmlRqst.readyState === XMLHttpRequest.DONE && xmlRqst.status === 200) {
 
-        let isCodeOk;
-        let isNameOk;
+        console.log(xmlRqst.response);
 
-        if (fieldName === "name") {
-            afterHttpRqstEffect(fieldName, xmlRqst.response, getLabelName);
-            (xmlRqst.response === "True") ? (isNameOk = false) : (isNameOk = true);
-        }
-
-        if (fieldName === "code") {
-
-            afterHttpRqstEffect(fieldName, xmlRqst.response, getLabelCode);
-            (xmlRqst.response === "True") ? (isCodeOk = false) : (isCodeOk = true);
-        }
-        (isCodeOk === true && isNameOk === true)? (getSubmitBtn.isDisabled = true): (getSubmitBtn.isDisabled = false);
+        (fieldName === "name") ? afterHttpRqstEffect(fieldName, xmlRqst.response, getLabelName)
+            : (xmlRqst.response === "False") ? (isNameOk = true) : (isNameOk = false);
+        
+        (fieldName === "code") ? afterHttpRqstEffect(fieldName, xmlRqst.response, getLabelCode)
+            : (xmlRqst.response === "False") ? (isCodeOk = true) : (isCodeOk = false);
+        
+        (isCodeOk === true && isNameOk === true) ? (getSubmitBtn.disabled = false): (getSubmitBtn.disabled = true);
     }
 }
 
@@ -72,8 +69,8 @@ function afterHttpRqstEffect(fieldName, response, targatElement) {
 
     targatElement.innerText = ""+fieldName+"";
     (response === "True")
-        ? (targatElement.setAttribute("class", "bi bi-x-circle text-danger"))
-        : (targatElement.setAttribute("class", "bi bi-check-circle text-success"));
+        ? (targatElement.setAttribute("class", "fs-5 bi bi-x-circle text-danger"))
+        : (targatElement.setAttribute("class", "fs-5 bi bi-check-circle text-success"));
 
     targatElement.innerText = (response === "True") ? (" "+fieldName+" is exists") : (" "+fieldName+" is available");
 }
