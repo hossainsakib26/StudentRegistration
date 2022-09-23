@@ -52,9 +52,7 @@ function callAjax(data, fieldName, backendMethod) {
 
 function backendResponse(fieldName, xmlRqst) {
     if (xmlRqst.readyState === XMLHttpRequest.DONE && xmlRqst.status === 200) {
-
-        console.log(xmlRqst.response);
-
+        
         (fieldName === "name") ? afterHttpRqstEffect(fieldName, xmlRqst.response, getLabelName)
             : (xmlRqst.response === "False") ? (isNameOk = true) : (isNameOk = false);
         

@@ -6,18 +6,19 @@
 }
 
 var xmlHttpRqst;
-
 var baseUrl = "/AcadClass/";
 
 //catch a field without id, class and tag name
 var getToken = document.querySelector("input[name=__RequestVerificationToken]");
-var getLabelCode = document.getElementById("CodeLbl");
+
 var getInputCode = document.getElementById("Code");
-var getLabelName = document.getElementById("NameLbl");
 var getInputName = document.getElementById("Name");
+
 var getFormValue = document.getElementById("createBeginForm");
+
 var msgDiv = document.getElementById("msg");
 var msgTextElement = document.getElementById("msgText");
+
 var contentPage = document.getElementById("createContent");
 
 var getSubmitBtn = document.getElementById("submitBtn");
