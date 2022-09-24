@@ -118,7 +118,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BLL\AcademicClassBLL.cs" />
     <Compile Include="Controllers\AcadClassController.cs" />
-    <Compile Include="Controllers\AcademicClassController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DAL\AcademicClassDAL.cs" />
     <Compile Include="DBContext\Student_DBContext.cs" />
@@ -249,11 +248,10 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\CommonNeeds\_MenuBar.cshtml" />
     <Content Include="Views\Shared\CommonNeeds\_Footer.cshtml" />
-    <Content Include="Views\AcademicClass\ClassList.cshtml" />
-    <Content Include="Views\AcademicClass\Create.cshtml" />
     <Content Include="Views\AcadClass\Index.cshtml" />
     <Content Include="Views\AcadClass\Create.cshtml" />
     <Content Include="Views\AcadClass\Details.cshtml" />
+    <Content Include="Views\AcadClass\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -42,18 +42,7 @@
                             @Html.DisplayFor(c => item.Name)
                         </td>
                         <td class="d-flex gap-2">
-                            <!--<button class="btn btn-info" id="btn-edit">
-                                <i class="bi bi-pencil-square"></i>-->
-                            @*@Html.ActionLink("Edit", "Edit", new { id = item.ID })*@
-                            <!--</button>
-                            <button class="btn btn-secondary" id="btn-details">
-                                <i class="bi bi-card-text"></i>-->
-                            @*@Html.ActionLink("Details", "Details", new { id = item.ID })*@
-                            <!--</button>
-                            <button class="btn btn-danger" id="btn-delete" onclick="">
-                                <i class="bi bi-trash"></i>-->
-                            @*@Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
-                            <!--</button>-->
+                            @Html.ActionLink("Details", "AcadClass", new { id = "" + item.ID + "" }, new { @class = "bi bi-archive" })
                             @Html.ActionLink("Edit", "AcadClass", new { id = "" + item.ID + "" }, new { @class = "bi bi-pencil-square" })
                         </td>
                     </tr>
