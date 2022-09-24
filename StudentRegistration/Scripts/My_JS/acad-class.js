@@ -13,6 +13,9 @@ var getToken = document.querySelector("input[name=__RequestVerificationToken]");
 
 var getInputCode = document.getElementById("Code");
 var getInputName = document.getElementById("Name");
+var getLabelCode = document.getElementById("CodeLbl");
+var getLabelName = document.getElementById("NameLbl");
+
 
 var getFormValue = document.getElementById("createBeginForm");
 
@@ -25,6 +28,11 @@ var getSubmitBtn = document.getElementById("submitBtn");
 
 getSubmitBtn.addEventListener("click", submitForm);
 
+var successDesign = ["text-success", "fs-5", "fw-normal"];
+var failedDesign = ["text-danger", "fs-5", "fw-normal"];
+
+msgDiv.classList.add(...successDesign);
+
 function submitForm() {
 
     // return a object
@@ -33,7 +41,7 @@ function submitForm() {
     let objJson = JSON.stringify(acadClassData);
 
     // make a querystring parameter
-    let urlQueryString = new URLSearchParams(acadClassData).toString(); 
+    let urlQueryString = new URLSearchParams(acadClassData).toString();
 
     console.log("JSON Stringify: ", objJson);
     console.log("Query String: ", urlQueryString);
@@ -67,26 +75,51 @@ function requestAjax(methodType, rqstUrl, objData) {
 
 }
 
-var successDesign = ["text-success", "fs-5", "fw-normal"];
-var failedDesign = ["text-danger", "fs-5", "fw-normal"];
-
 function getResponses() {
 
     console.log("Ready State: ", this.readyState);
     console.log("Status: ", this.status);
-
+    console.log("Response: ", this.response);
+    var data = JSON.parse(this.response);
+    console.log("Json Parse Response: ", data);
+    msgTextElement.textContent = null;
+    msgDiv.classList.remove(...successDesign);
+    msgDiv.classList.remove(...failedDesign);
     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-        msgDiv.classList.add(...successDesign);
-        msgTextElement.textContent = "Data added Successfully!";
-    } else {
-        msgDiv.classList.add(...failedDesign);
-        msgTextElement.textContent = "Data added operation has been failed!";
-    }
+        
+        if (data.acadClass.ID > 0) {
+            msgDiv.classList.add(...successDesign);
+            msgTextElement.textContent = "" + data.acadClass.Code + " added Successfully! and it's id is " + data.acadClass.ID + "";
+        }
+        if (data.acadClass.ID === 0) {
+            msgDiv.classList.add(...failedDesign);
+            msgTextElement.textContent = "Data added operation has been failed!"
+            if (data.codeExists === true && data.nameExists === false) {
+                controlLabel(getLabelCode, "code", this.response);
+            }
+            if (data.nameExists === true && data.codeExists === false) {
+                controlLabel(getLabelName, "name", this.response);
+            }
+            if (data.nameExists === true && data.codeExists === true) {
+                controlLabel(getLabelCode, "code", this.response);
+                controlLabel(getLabelName, "name", this.response);
+            }
+        }
 
+    }
+}
+
+function controlLabel(targatElement, fieldName, xttpResponse) {
+    targatElement.innerText = "" + fieldName + "";
+    (xttpResponse !== null)
+        ? (targatElement.setAttribute("class", "fs-5 bi bi-x-circle text-danger"))
+        : (targatElement.setAttribute("class", "fs-5 bi bi-check-circle text-success"));
+
+    targatElement.innerText = (xttpResponse !== null) ? (" " + fieldName + " is exists") : (" " + fieldName + " is available");
 }
 
 function setAcadClassValueWithToken() {
-    
+
     let classData = new AcadClass();
     classData.code = getInputCode.value;
     classData.name = getInputName.value;

@@ -42,18 +42,20 @@ namespace StudentRegistration.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(AcademicClass acadClass)
         {
+            Object forResponseObject;
             try
             {
                 if (ModelState.IsValid)
                 {
                     if (!IsCodeExists(acadClass.Code) && !IsNameExists(acadClass.Name))
                     {
-                        ViewBag.MSG = "Save Success";
                         _bll.AddClass(acadClass);
-                        return View(acadClass);
+                        forResponseObject = new { acadClass };
+                        return Json(forResponseObject, JsonRequestBehavior.AllowGet);
                     }
-                    ViewBag.FMSG = "Save OT Failed";
-                    return View();
+                    forResponseObject = new { acadClass, codeExists = IsCodeExists(acadClass.Code), nameExists = IsNameExists(acadClass.Name) };
+                    return Json(forResponseObject, JsonRequestBehavior.AllowGet);
+
                 }
             }
             catch (Exception e)
