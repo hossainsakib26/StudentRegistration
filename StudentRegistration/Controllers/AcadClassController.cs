@@ -40,7 +40,7 @@ namespace StudentRegistration.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(AcademicClass acadClass)
+        public ActionResult Create(AcademicClass acadClass, bool isFromEdit)
         {
             Object forResponseObject;
             try
@@ -70,8 +70,24 @@ namespace StudentRegistration.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult Edit(long? id)
+        {
+            var dataList = _bll.Classes();
+            var selectedData = (_checker.HasObjectInArray(dataList))? dataList.Where(c => c.ID == id).FirstOrDefault() : null;
+            return View(selectedData);
+        }
+
+        [HttpPost]
         public ActionResult Edit(long id)
         {
+            if (id > 0)
+            {
+                var dataList = _bll.Classes();
+                var selectedData = (_checker.HasObjectInArray(dataList)) ? (dataList.Where(c => c.ID == id).FirstOrDefault()) : (null);
+                return RedirectToAction("Create", new { isFromEdit = true });
+            }
+            ViewBag.NoData = "No Data";
             return View();
         }
 

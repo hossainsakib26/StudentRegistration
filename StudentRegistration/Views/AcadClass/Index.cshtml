@@ -14,7 +14,7 @@
         <div class="d-flex justify-content-between border-bottom pb-2">
             <h3 class="card-title">@ViewBag.IndexName</h3>
             <button class="btn btn-primary" id="addNewClassBtn"><i class="bi bi-plus-square-fill"></i> Add New</button>
-            
+
         </div>
 
         @* body *@
@@ -42,8 +42,11 @@
                             @Html.DisplayFor(c => item.Name)
                         </td>
                         <td class="d-flex gap-2">
-                            @Html.ActionLink("Details", "AcadClass", new { id = "" + item.ID + "" }, new { @class = "bi bi-archive" })
-                            @Html.ActionLink("Edit", "AcadClass", new { id = "" + item.ID + "" }, new { @class = "bi bi-pencil-square" })
+
+                            @Html.ActionLink("Details", "Details", "AcadClass", new { id = "" + item.ID + "" }, new { @class = "bi bi-archive" })
+
+                            @Html.ActionLink("Edit", "Edit", "AcadClass", new { id = "" + item.ID + "" }, new { @class = "bi bi-pencil-square" })
+
                         </td>
                     </tr>
 
