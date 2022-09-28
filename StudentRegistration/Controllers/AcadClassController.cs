@@ -13,13 +13,11 @@ namespace StudentRegistration.Controllers
 {
     public class AcadClassController : Controller
     {
-        private AcademicClass _class;
         private AcademicClassBLL _bll;
         private ValidationChecker _checker;
 
         public AcadClassController()
         {
-            _class = new AcademicClass();
             _bll = new AcademicClassBLL();
             _checker = new ValidationChecker();
         }
@@ -101,7 +99,7 @@ namespace StudentRegistration.Controllers
 
             return View("Index");
         }
-
+        
         public bool IsCodeExists(string code)
         {
             var dataList = _bll.Classes();
