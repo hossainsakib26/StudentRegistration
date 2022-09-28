@@ -9,7 +9,7 @@ namespace StudentRegistration.DBContext
 {
     public class Student_DBContext: DbContext
     {
-        public Student_DBContext() : base()
+        public Student_DBContext() : base("Student_DBContext")
         {
 
         }

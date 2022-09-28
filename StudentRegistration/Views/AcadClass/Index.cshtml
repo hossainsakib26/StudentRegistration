@@ -13,7 +13,8 @@
 
         <div class="d-flex justify-content-between border-bottom pb-2">
             <h3 class="card-title">@ViewBag.IndexName</h3>
-            <button class="btn btn-primary" id="addNewClassBtn"><i class="bi bi-plus-square-fill"></i> Add New</button>
+
+            @Html.ActionLink("Create New Class", "Create", "AcadClass", new {  }, new { @class = "btn btn-primary" })
 
         </div>
 
@@ -43,9 +44,9 @@
                         </td>
                         <td class="d-flex gap-2">
 
-                            @Html.ActionLink("Details", "Details", "AcadClass", new { id = "" + item.ID + "" }, new { @class = "bi bi-archive" })
-
                             @Html.ActionLink("Edit", "Edit", "AcadClass", new { id = "" + item.ID + "" }, new { @class = "bi bi-pencil-square" })
+
+                            @Html.ActionLink("Delete", "Delete", "AcadClass", new { id = "" + item.ID + "" }, new { @class = "bi bi-trash" })
 
                         </td>
                     </tr>
@@ -57,5 +58,3 @@
 
     </div>
 </div>
-
-@Scripts.Render("~/bundles/rout-changer")

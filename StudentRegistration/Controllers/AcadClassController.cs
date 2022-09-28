@@ -7,6 +7,7 @@ using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace StudentRegistration.Controllers
 {
@@ -34,19 +35,19 @@ namespace StudentRegistration.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            ViewBag.FormName = "Create Form";
+            ViewBag.FormName = "Add Academic Class";
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(AcademicClass acadClass, bool isFromEdit)
+        public ActionResult Create(AcademicClass acadClass)
         {
-            Object forResponseObject;
             try
             {
                 if (ModelState.IsValid)
                 {
+                    Object forResponseObject;
                     if (!IsCodeExists(acadClass.Code) && !IsNameExists(acadClass.Name))
                     {
                         _bll.AddClass(acadClass);
@@ -64,31 +65,41 @@ namespace StudentRegistration.Controllers
             }
             return View();
         }
-
-        public ActionResult Details(long id)
-        {
-            return View();
-        }
-
+        
         [HttpGet]
-        public ActionResult Edit(long? id)
+        public ActionResult Edit(long id)
         {
+            ViewBag.FormName = "Edit Class";
             var dataList = _bll.Classes();
-            var selectedData = (_checker.HasObjectInArray(dataList))? dataList.Where(c => c.ID == id).FirstOrDefault() : null;
+            var selectedData = (_checker.HasObjectInArray(dataList)) ? dataList.FirstOrDefault(c => c.ID == id) : null;
             return View(selectedData);
         }
 
         [HttpPost]
-        public ActionResult Edit(long id)
+        public ActionResult Edit(AcademicClass model)
+        {
+            if (ModelState.IsValid)
+            {
+                _bll.UpdateClass(model);
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        public ActionResult Delete(long id)
         {
             if (id > 0)
             {
                 var dataList = _bll.Classes();
-                var selectedData = (_checker.HasObjectInArray(dataList)) ? (dataList.Where(c => c.ID == id).FirstOrDefault()) : (null);
-                return RedirectToAction("Create", new { isFromEdit = true });
+                if (_checker.HasObjectInArray(dataList))
+                {
+                    var singleData = dataList.FirstOrDefault(c => c.ID == id);
+                    _bll.DeleteData(singleData);
+                    return RedirectToAction("Index");
+                }
             }
-            ViewBag.NoData = "No Data";
-            return View();
+
+            return View("Index");
         }
 
         public bool IsCodeExists(string code)

@@ -250,7 +250,6 @@
     <Content Include="Views\Shared\CommonNeeds\_Footer.cshtml" />
     <Content Include="Views\AcadClass\Index.cshtml" />
     <Content Include="Views\AcadClass\Create.cshtml" />
-    <Content Include="Views\AcadClass\Details.cshtml" />
     <Content Include="Views\AcadClass\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>

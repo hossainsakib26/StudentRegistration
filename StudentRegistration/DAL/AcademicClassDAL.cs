@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -35,5 +36,19 @@ namespace StudentRegistration.DAL
             }
             return false;
         }
+
+        public bool UpdateClass(AcademicClass aClass)
+        {
+            _db.AcademicClasses.Attach(aClass);
+            _db.Entry(aClass).State = EntityState.Modified;
+            return (_db.SaveChanges() > 0);
+        }
+
+        public bool DeleteData(AcademicClass model)
+        {
+            _db.AcademicClasses.Remove(model);
+            return (_db.SaveChanges() > 0);
+        }
+
     }
 }
